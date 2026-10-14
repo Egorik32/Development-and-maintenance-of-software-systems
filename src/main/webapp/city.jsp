@@ -26,7 +26,7 @@
                                 <th>Статус</th>
                                 <th>Население</th>
                                 <th>Парк</th>
-                                
+                                <th>Действия</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -37,6 +37,10 @@
                                     <td>${city.status}</td>
                                     <td>${city.population}</td>
                                     <td>${city.park.name}</td>
+                                    <td class="table-actions">
+                                        <a class="btn btn-sm btn-outline-primary" href="<c:url value='/editcity?id=${city.id}' />">Редактировать</a>
+                                        <a class="btn btn-sm btn-outline-danger" onclick="return confirm('Удалить запись?')" href="<c:url value='/deletecity?id=${city.id}' />">Удалить</a>
+                                    </td>
                                 </tr>
                             </c:forEach>
                         </tbody>
