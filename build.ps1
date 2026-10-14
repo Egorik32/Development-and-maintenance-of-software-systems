@@ -1,4 +1,4 @@
-$ErrorActionPreference = "Stop"
+﻿$ErrorActionPreference = "Stop"
 . (Join-Path (Split-Path $PSScriptRoot -Parent) "runtime\java17_env.ps1")
 $out = Join-Path $PSScriptRoot "out"
 $build = Join-Path $PSScriptRoot "build"
