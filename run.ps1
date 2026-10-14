@@ -12,10 +12,10 @@ $http = $server.Server.Service.Connector | Where-Object protocol -eq "HTTP/1.1"
 $http.port = [string]$Port
 $http.SetAttribute("address", "127.0.0.1")
 $server.Save("$base\conf\server.xml")
-Copy-Item -LiteralPath (Join-Path $PSScriptRoot "dist\lab1-13.war") -Destination "$base\webapps\lab1-13.war" -Force
+Copy-Item -LiteralPath (Join-Path $PSScriptRoot "dist\lab1-14.war") -Destination "$base\webapps\lab1-14.war" -Force
 $env:CATALINA_HOME = $tomcat
 $env:CATALINA_BASE = $base
 $env:CATALINA_OPTS = "-Dfile.encoding=UTF-8"
-Write-Host "Open http://localhost:$Port/lab1-13/"
+Write-Host "Open http://localhost:$Port/lab1-14/"
 Write-Host "Press Ctrl+C to stop Tomcat before opening another lab."
 & "$tomcat\bin\catalina.bat" run

@@ -31,4 +31,26 @@ public class CityServlet extends HttpServlet {
         }
     }
 
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        City city = readCity(request);
+        try {
+            cityDAO.insert(city);
+            response.sendRedirect(request.getContextPath() + "/city");
+        } catch (DAOException ex) {
+            throw new ServletException(ex);
+        }
+    }
+
+    static City readCity(HttpServletRequest request) {
+        Park park = new Park();
+        park.setId(Long.valueOf(request.getParameter("parkId")));
+        return new City(
+                request.getParameter("name"),
+                request.getParameter("status"),
+                Integer.valueOf(request.getParameter("population")),
+                park);
+    }
 }

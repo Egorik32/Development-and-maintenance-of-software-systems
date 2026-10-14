@@ -42,6 +42,26 @@ public class ParkDbDAO {
         }
     }
 
+    public Long insert(Park park) throws DAOException {
+        String sql = """
+                INSERT INTO parks (name, type, area, has_water, build_date)
+                VALUES (?, ?, ?, ?, ?)
+                """;
+        try (Connection connection = builder.getConnection();
+                PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            fillParkStatement(statement, park);
+            statement.executeUpdate();
+            try (ResultSet keys = statement.getGeneratedKeys()) {
+                if (keys.next()) {
+                    return keys.getLong(1);
+                }
+                return null;
+            }
+        } catch (SQLException ex) {
+            throw new DAOException("Cannot insert park", ex);
+        }
+    }
+
     static Park mapPark(ResultSet resultSet) throws SQLException {
         return new Park(
                 resultSet.getLong("id"),
@@ -52,4 +72,11 @@ public class ParkDbDAO {
                 resultSet.getDate("build_date").toLocalDate());
     }
 
+    private static void fillParkStatement(PreparedStatement statement, Park park) throws SQLException {
+        statement.setString(1, park.getName());
+        statement.setString(2, park.getType());
+        statement.setBigDecimal(3, park.getArea());
+        statement.setBoolean(4, park.isHasWater());
+        statement.setDate(5, Date.valueOf(park.getBuildDate()));
+    }
 }

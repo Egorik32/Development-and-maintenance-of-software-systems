@@ -69,7 +69,7 @@
                             <label class="form-label" for="buildDate">Дата постройки</label>
                             <input class="form-control" type="date" id="buildDate" name="buildDate" required>
                         </div>
-                        <button class="btn btn-primary" type="submit" disabled>Добавить</button>
+                        <button class="btn btn-primary" type="submit">Добавить</button>
                     </form>
                 </div>
             </section>

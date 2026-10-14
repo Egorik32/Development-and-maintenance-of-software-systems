@@ -54,6 +54,23 @@ public class CityDbDAO {
         }
     }
 
+    public Long insert(City city) throws DAOException {
+        String sql = "INSERT INTO cities (park_id, name, status, population) VALUES (?, ?, ?, ?)";
+        try (Connection connection = builder.getConnection();
+                PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            fillCityStatement(statement, city);
+            statement.executeUpdate();
+            try (ResultSet keys = statement.getGeneratedKeys()) {
+                if (keys.next()) {
+                    return keys.getLong(1);
+                }
+                return null;
+            }
+        } catch (SQLException ex) {
+            throw new DAOException("Cannot insert city", ex);
+        }
+    }
+
     private static City mapCity(ResultSet resultSet) throws SQLException {
         Park park = new Park(
                 resultSet.getLong("park_id"),
@@ -70,4 +87,10 @@ public class CityDbDAO {
                 park);
     }
 
+    private static void fillCityStatement(PreparedStatement statement, City city) throws SQLException {
+        statement.setLong(1, city.getPark().getId());
+        statement.setString(2, city.getName());
+        statement.setString(3, city.getStatus());
+        statement.setInt(4, city.getPopulation());
+    }
 }

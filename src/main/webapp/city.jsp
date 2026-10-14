@@ -67,7 +67,7 @@
                                 </c:forEach>
                             </select>
                         </div>
-                        <button class="btn btn-primary" type="submit" disabled>Добавить</button>
+                        <button class="btn btn-primary" type="submit">Добавить</button>
                     </form>
                 </div>
             </section>

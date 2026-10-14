@@ -2,7 +2,7 @@ $ErrorActionPreference = "Stop"
 
 $projectRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 $schema = Join-Path $projectRoot "sql\schema.sql"
-$dbName = "cityparks_lab13"
+$dbName = "cityparks_lab14"
 $dbUser = "postgres"
 $dbPassword = "postgres"
 
