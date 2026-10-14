@@ -29,4 +29,25 @@ public class ParkServlet extends HttpServlet {
         }
     }
 
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        Park park = readPark(request);
+        try {
+            parkDAO.insert(park);
+            response.sendRedirect(request.getContextPath() + "/park");
+        } catch (DAOException ex) {
+            throw new ServletException(ex);
+        }
+    }
+
+    static Park readPark(HttpServletRequest request) {
+        return new Park(
+                request.getParameter("name"),
+                request.getParameter("type"),
+                new BigDecimal(request.getParameter("area")),
+                request.getParameter("hasWater") != null,
+                LocalDate.parse(request.getParameter("buildDate")));
+    }
 }
