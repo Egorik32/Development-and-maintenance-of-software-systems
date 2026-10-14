@@ -15,8 +15,8 @@
     <main class="container">
         <h1 class="page-title">Главное меню</h1>
         <ul class="list-group list-group-flush">
-            <li class="list-group-item"><a href="<c:url value='#' />">Города</a></li>
-            <li class="list-group-item"><a href="<c:url value='#' />">Парки</a></li>
+            <li class="list-group-item"><a href="<c:url value='/city' />">Города</a></li>
+            <li class="list-group-item"><a href="<c:url value='/park' />">Парки</a></li>
         </ul>
     </main>
     <jsp:include page="/views/footer.jsp" />

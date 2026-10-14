@@ -9,10 +9,10 @@
         <div class="collapse navbar-collapse" id="navbarContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="<c:url value='#' />">Города</a>
+                    <a class="nav-link" href="<c:url value='/city' />">Города</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<c:url value='#' />">Парки</a>
+                    <a class="nav-link" href="<c:url value='/park' />">Парки</a>
                 </li>
             </ul>
         </div>
