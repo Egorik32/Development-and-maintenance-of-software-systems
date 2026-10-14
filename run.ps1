@@ -1,5 +1,9 @@
-param([int]$Port = 8080)
+﻿param([int]$Port = 8080)
 $ErrorActionPreference = "Stop"
+$serverBase = Join-Path $PSScriptRoot ".tomcat"
+$running = Get-CimInstance Win32_Process -Filter "Name = 'java.exe'" | Where-Object { $_.CommandLine -and $_.CommandLine.Contains($serverBase) }
+if ($running) { throw "This lab is already running. Use stop.ps1 before restarting." }
+if (Get-NetTCPConnection -LocalPort $Port -State Listen -ErrorAction SilentlyContinue) { throw "Port $Port is occupied. Use run.ps1 -Port 8082 or another free port." }
 & (Join-Path $PSScriptRoot "build.ps1")
 . (Join-Path (Split-Path $PSScriptRoot -Parent) "runtime\java17_env.ps1")
 $tomcat = Join-Path (Split-Path $PSScriptRoot -Parent) "runtime\apache-tomcat-10.0.27"
