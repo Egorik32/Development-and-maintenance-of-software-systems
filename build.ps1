@@ -19,6 +19,6 @@ if ($sources.Count -gt 0) {
 }
 $servletApi = Join-Path $build "WEB-INF\lib\jakarta.servlet-api-5.0.0.jar"
 if (Test-Path -LiteralPath $servletApi) { Remove-Item -LiteralPath $servletApi }
-& "$env:JAVA_HOME\bin\jar.exe" --create --file (Join-Path $dist "lab1-10.war") -C $build .
+& "$env:JAVA_HOME\bin\jar.exe" --create --file (Join-Path $dist "lab1-11.war") -C $build .
 if ($LASTEXITCODE -ne 0) { throw "WAR packaging failed." }
-Write-Host "WAR created: dist\lab1-10.war"
+Write-Host "WAR created: dist\lab1-11.war"
