@@ -71,6 +71,29 @@ public class CityDbDAO {
         }
     }
 
+    public void update(City city) throws DAOException {
+        String sql = "UPDATE cities SET park_id = ?, name = ?, status = ?, population = ? WHERE id = ?";
+        try (Connection connection = builder.getConnection();
+                PreparedStatement statement = connection.prepareStatement(sql)) {
+            fillCityStatement(statement, city);
+            statement.setLong(5, city.getId());
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            throw new DAOException("Cannot update city", ex);
+        }
+    }
+
+    public void delete(Long id) throws DAOException {
+        String sql = "DELETE FROM cities WHERE id = ?";
+        try (Connection connection = builder.getConnection();
+                PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setLong(1, id);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            throw new DAOException("Cannot delete city", ex);
+        }
+    }
+
     private static City mapCity(ResultSet resultSet) throws SQLException {
         Park park = new Park(
                 resultSet.getLong("park_id"),

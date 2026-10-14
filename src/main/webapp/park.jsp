@@ -27,7 +27,7 @@
                                 <th>Площадь</th>
                                 <th>Водоем</th>
                                 <th>Дата постройки</th>
-                                
+                                <th>Действия</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -39,6 +39,10 @@
                                     <td>${park.area}</td>
                                     <td>${park.hasWater ? 'есть' : 'нет'}</td>
                                     <td>${park.buildDate}</td>
+                                    <td class="table-actions">
+                                        <a class="btn btn-sm btn-outline-primary" href="<c:url value='/editpark?id=${park.id}' />">Редактировать</a>
+                                        <a class="btn btn-sm btn-outline-danger" onclick="return confirm('Удалить запись?')" href="<c:url value='/deletepark?id=${park.id}' />">Удалить</a>
+                                    </td>
                                 </tr>
                             </c:forEach>
                         </tbody>

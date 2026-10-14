@@ -62,6 +62,33 @@ public class ParkDbDAO {
         }
     }
 
+    public void update(Park park) throws DAOException {
+        String sql = """
+                UPDATE parks
+                SET name = ?, type = ?, area = ?, has_water = ?, build_date = ?
+                WHERE id = ?
+                """;
+        try (Connection connection = builder.getConnection();
+                PreparedStatement statement = connection.prepareStatement(sql)) {
+            fillParkStatement(statement, park);
+            statement.setLong(6, park.getId());
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            throw new DAOException("Cannot update park", ex);
+        }
+    }
+
+    public void delete(Long id) throws DAOException {
+        String sql = "DELETE FROM parks WHERE id = ?";
+        try (Connection connection = builder.getConnection();
+                PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setLong(1, id);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            throw new DAOException("Cannot delete park", ex);
+        }
+    }
+
     static Park mapPark(ResultSet resultSet) throws SQLException {
         return new Park(
                 resultSet.getLong("id"),
