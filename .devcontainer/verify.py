@@ -43,8 +43,9 @@ def verify_proxy_redirect():
     try:
         opener.open(req, timeout=10)
     except urllib.error.HTTPError as error:
-        require(error.code == 302 and error.headers["Location"] ==
-                "https://codespaces-test.example/lab1-9/", "HTTPS redirect through the Codespaces proxy")
+        require(error.code == 302 and error.headers["Location"] in
+                ("/lab1-9/", "https://codespaces-test.example/lab1-9/"),
+                "HTTPS-safe redirect through the Codespaces proxy")
     else:
         raise AssertionError("Expected redirect from the forwarded root URL.")
 

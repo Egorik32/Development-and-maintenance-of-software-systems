@@ -6,6 +6,7 @@ import json
 import os
 from pathlib import Path
 import shutil
+import signal
 import socket
 import subprocess
 import sys
@@ -229,8 +230,18 @@ def start():
 
 def stop():
     if running():
-        home = Path(os.environ.get("CATALINA_HOME", "/usr/local/tomcat"))
-        run([home / "bin/catalina.sh", "stop", "15", "-force"], env=tomcat_env())
+        pid_file = TOMCAT / "tomcat.pid"
+        pid = int(pid_file.read_text(encoding="ascii").strip())
+        try:
+            os.kill(pid, signal.SIGTERM)
+        except ProcessLookupError:
+            pass
+        deadline = time.monotonic() + 15
+        while running() and time.monotonic() < deadline:
+            time.sleep(0.2)
+        if running():
+            os.kill(pid, signal.SIGKILL)
+        pid_file.unlink(missing_ok=True)
 
 
 def main():

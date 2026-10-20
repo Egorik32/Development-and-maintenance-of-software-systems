@@ -54,6 +54,28 @@ class LauncherTests(unittest.TestCase):
                 lab.prepare_databases()
             run.assert_not_called()
 
+    def test_first_seed_uses_a_transaction(self):
+        with patch.object(lab.subprocess, "run") as process, patch.object(lab, "psql") as sql, \
+                patch.object(lab, "run") as run:
+            process.return_value.returncode = 0
+            sql.side_effect = ["1", "0"] * 3
+            lab.prepare_databases()
+            self.assertEqual(run.call_count, 3)
+            for call in run.call_args_list:
+                self.assertIn("--single-transaction", call.args[0])
+                self.assertIn("ON_ERROR_STOP=1", call.args[0])
+
+    def test_stop_signals_only_the_owned_server(self):
+        with tempfile.TemporaryDirectory() as directory:
+            base = Path(directory)
+            (base / "tomcat.pid").write_text("12345", encoding="ascii")
+            with patch.object(lab, "TOMCAT", base), \
+                    patch.object(lab, "running", side_effect=[True, False, False]), \
+                    patch.object(lab.os, "kill") as kill:
+                lab.stop()
+                kill.assert_called_once_with(12345, lab.signal.SIGTERM)
+                self.assertFalse((base / "tomcat.pid").exists())
+
     def test_tomcat_configuration_is_idempotent_and_proxy_aware(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
