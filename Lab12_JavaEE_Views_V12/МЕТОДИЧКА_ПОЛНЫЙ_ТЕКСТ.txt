@@ -1,0 +1,530 @@
+Лабораторная работа 1.12. Создание представлений веб приложения 
+Цель лабораторной работы. 
+Получить практические навыки в создании представлений для проекта 
+Java EE.  
+Введение 
+Для разработки представлений необходимо в репозитории создать ветку 
+dev3 на основе ветки master. После проверки преподавателем 
+работоспособности веб-приложения ветка dev3 должна быть слита с веткой 
+master. 
+Создание страниц jsp 
+В пакете view создадим дв е jsp-страницы role.jsp и person.jsp для 
+отображения в браузере информации о должностях и сотрудниках.  
+Сгенерированные коды страниц role.jsp и person.jsp будут иметь следующий 
+вид, представленный на листингах 1 и 2.. 
+ 
+Листинг 1. 
+ 
+<!DOCTYPE html> 
+<html> 
+<link rel="stylesheet" type="text/css" href="css/style.css"> 
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8"> 
+<title> Должности </title> 
+<head> 
+<meta charset="UTF-8"> 
+<title> </title> 
+</head> 
+<body> 
+</body> 
+</html> 
+ 
+Листинг 2. 
+ 
+<!DOCTYPE html> 
+<html> 
+<link rel="stylesheet" type="text/css" href="css/style.css"> 
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8"> 
+<title> Cотрудники </title> 
+
+2 
+ 
+<head> 
+<meta charset="UTF-8"> 
+<title> </title> 
+</head> 
+<body> 
+</body> 
+</html> 
+ 
+Модификация главной страницы 
+В сервлетах RoleServlet и PersonServlet изменим аннотации, 
+определяющие конечные точки вызова страниц role.jsp и person.jsp, 
+следующим образом. 
+ 
+@WebServlet("/role") 
+@WebServlet("/person") 
+ 
+В разметке главной страницы добавим адреса переходов на страницы 
+role.jsp и person.jsp. 
+ 
+<li><a href="/employees/persons">Сотрудники</a> 
+<li><a href="/employees/roles">Должности</a> 
+ 
+С учетом, сделанных изменений разметка главной страницы будет иметь 
+вид, представленный на листинге 3. 
+ 
+Листинг 3. 
+ 
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+    pageEncoding="UTF-8"%> 
+<!DOCTYPE html> 
+<html lang="ru"> 
+<head> 
+<link rel="stylesheet" type="text/css" href="css/style.css"> 
+<meta charset="UTF-8"> 
+<!-- Настройка viewport --> 
+ <meta name="viewport" content="width=device-width, initial-scale=1"> 
+<!-- Bootstrap CSS --> 
+<link rel="stylesheet" href="css/bootstrap.min.css"> 
+<title>Управление персоналом</title> 
+ 
+</head> 
+<body> 
+ <div class="container-fluid"> 
+
+3 
+ 
+ <jsp:include page="/views/header.jsp" /> 
+ <div class="container"> 
+  <br><br><br> 
+    <div class="list-group text-center py-3 px-3"> 
+    <h2>Функции системы</h2> 
+    <ul class="list-group list-group-flush"> 
+     <li class="list-group-item list-group-item-
+primary"> 
+     <a href="/persons/person">Сотрудники</a> 
+     <li class="list-group-item list-group-item-
+info"> 
+     <a href="/persons/role">Должности</a> 
+    </ul> 
+     </div> 
+  <br><br> 
+ </div> 
+  <jsp:include page="/views/footer.jsp" /> 
+</div> 
+ 
+<!-- jQuery --> 
+<script src="js/jquery-3.6.4.js"></script> 
+<!-- Bootstrap JS + Popper JS -->  
+<script defer src="js/bootstrap.bundle.min.js"></script>  
+ 
+</body> 
+</html> 
+Модификация страницы Должности 
+При разработке представлений будет использована с тандартная 
+библиотека тегов JSP (JavaServer Pages Standard Tag Library,  JSTL), которая 
+является расширением её спецификации  и используется для условной 
+обработки, создания циклов, интернационализации страницы, разбора XML 
+данных. 
+JSTL является альтернативой прямой вставки Java кода в jsp-страницы. 
+JSTL представляет собой набор тегов в стиле  HTML, позволяющих 
+обращаться к объектам Java и выполнять многие из конструкций языка Java. 
+Для использования библиотеки тегов JSTL в проектах Jakarta (Dynamic 
+Web 5.0) необходимо скачать библиотеки Jakarta Servlet ( jakarta.servlet.jsp.jstl-
+api-3.0.0.jar, jakarta.servlet.jsp.jstl-3.0.1.jar) и  поместить их в папку WEB-
+INFO/lib. Данные библиотеки определяют серверный API для обработки 
+HTTP-запросов и ответов (рис.1). 
+
+4 
+ 
+ 
+Рисунок 1 – Библиотеки JSTL 
+Это обеспечит возможность использования языка Expression Language 
+(EL) в jsp страницах. 
+Для применения основных библиотек тегов  JSTL в jsp странице 
+необходимо подключить библиотеки следующим образом. 
+ 
+<%@ taglib prefix="c" uri="jakarta.tags.core" %> 
+ 
+Страница должностей должна отображать таблицу с списком 
+должностей и форму для ввода новой должности. 
+Разметка jsp-страницы role.jsp приведена на листинге 4. 
+ 
+Листинг 4. 
+ 
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+ pageEncoding="UTF-8"%> 
+<%@ taglib prefix="c" uri="jakarta.tags.core"%> 
+<%@ page import="domain.Role"%> 
+ 
+<%  
+Role r1 = new Role(1l, "директор"); 
+Role r2 = new Role(2l, "бухгалтер"); 
+Role r3= new Role(3l, "менеджер"); 
+Role r4 = new Role(4l, "маркетолог"); 
+Role[] roles = new Role[]{r1, r2, r3, r4}; 
+int length = roles.length; 
+pageContext.setAttribute("roles", roles); 
+%> 
+ 
+<!DOCTYPE html> 
+<html> 
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8"> 
+<title>Должности</title> 
+<head> 
+<meta charset="UTF-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+<title>Roles</title> 
+<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+<!-- Bootstrap CSS --> 
+
+
+5 
+ 
+<link rel="stylesheet" href="css/bootstrap.min.css"> 
+<!-- jQuery --> 
+<script defer src="js/jquery-3.6.4.js"></script> 
+<!-- Bootstrap JS + Popper JS --> 
+<script defer src="js/bootstrap.min.js"></script> 
+</head> 
+<body> 
+  <div class="container-fluid"> 
+  <jsp:include page="/views/header.jsp" /> 
+  <div class="container-fluid"> 
+      <div class="row justify-content-start "> 
+        <div class="col-8 border bg-light px-4"> 
+          <h3>Список должностей</h3> 
+          <table class="table"> 
+            <thead> 
+              <th scope="col">Код</th> 
+              <th scope="col">Должность</th> 
+              <th scope="col"> Редактировать</th> 
+              <th scope="col">Удалить</th> 
+            </thead> 
+            <tbody> 
+              <c:forEach var="role" items="${roles}"> 
+                <tr> 
+                  <td>${role.getId()}</td> 
+                  <td>${role.getNamerole()}</td> 
+                  <td width="20"><a href="#" role="button" 
+                     class="btn btn-outline-primary">  
+                     <img alt="Редактировать" 
+                     src="images/icon-edit.png"></a></td> 
+                   <td width="20"><a href="#" role="button" 
+                     class="btn btn-outline-primary">  
+                     <img alt="Удалить" 
+                        src="images/icon-delete.png"></a></td> 
+                  </tr> 
+               </c:forEach> 
+            </tbody> 
+          </table> 
+        </div> 
+        <div class="col-4 border px-4"> 
+          <form method="POST" action=""> 
+            <h3>Новая должность</h3> 
+            <div class="mb-3"> 
+              <br> <label for="inputRole"  
+              class="col-sm-3 col-form-label">Должность</label> 
+              <div class="col-sm-6"> 
+                input type="text" name="inputRole"  
+                  class="form-control" id="personRole" /> 
+            </div> 
+          </div> 
+          <p> 
+            <br> <br> <br> 
+
+6 
+ 
+            <button type="submit"  
+              class="btn btn-primary">Добавить</button> 
+              <br> 
+          </p> 
+          </form> 
+        </div> 
+      </div> 
+    </div> 
+    <jsp:include page="/views/footer.jsp" /> 
+  </div> 
+</body> 
+</html> 
+После подключения библиотеки тегов JSTL необходимо импортировать  класс 
+Role. 
+ 
+<%@ page import="domain.Role"%> 
+ 
+Для тестирования jsp-страницы role.jsp вставим в разметку java код 
+создания массива классов Role и установим контекст страницы с помощью 
+метода pageContext.setAttribute( ). 
+ 
+<%  
+Role r1 = new Role(1l, "директор"); 
+Role r2 = new Role(2l, "бухгалтер"); 
+Role r3= new Role(3l, "менеджер"); 
+Role r4 = new Role(4l, "маркетолог"); 
+Role[] roles = new Role[]{r1, r2, r3, r4}; 
+pageContext.setAttribute("roles", roles); 
+%> 
+ 
+Для создаваемой таблицы определим шапку, состоящую из заголовков 
+четырех столбцов: Код, Должность, Редактировать и Удалить. 
+ 
+<thead> 
+  <th scope="col">Код</th> 
+  <th scope="col">Должность</th> 
+  <th scope="col"> Редактировать</th> 
+  <th scope="col">Удалить</th> 
+</thead> 
+ 
+Далее создаем цикл для заполнения таблицы. 
+ 
+<tbody> 
+  <c:forEach var="role" items="${roles}"> 
+     <tr> 
+
+7 
+ 
+       <td>${role.getId()}</td> 
+       <td>${role.getNamerole()}</td> 
+       <td width="20"><a href="#" role="button" 
+          class="btn btn-outline-primary">  
+          <img alt="Редактировать" src="images/icon-edit.png"></a> 
+       </td> 
+       <td width="20"><a href="#" role="button" 
+         class="btn btn-outline-primary">  
+         <img alt="Удалить" src="images/icon-delete.png"></a> 
+       </td> 
+     </tr> 
+  </c:forEach> 
+</tbody> 
+ 
+ 
+Форма на странице role.jsp предназначена для ввода новой должности в 
+базу данных. 
+ 
+<form method="POST" action=""> 
+  <h3>Новая должность</h3> 
+  <div class="mb-3"> 
+    <br> <label for="inputRole" class="col-sm-3 col-form-label">  
+         Должность </label> 
+    <div class="col-sm-6"> 
+      input type="text" name="inputRole"  
+        class="form-control" id="personRole" /> 
+    </div> 
+  </div> 
+  <p> 
+    <br> <br> <br> 
+    <button type="submit" class="btn btn-primary">Добавить</button> 
+    <br> 
+  </p> 
+</form> 
+ 
+Кнопка Добавить предназначена для отправки данных формы на сервер. 
+ 
+<button type="submit" class="btn btn-primary">Добавить</button> 
+ 
+При запуске веб-приложения и переходе на страницу Должности 
+получим следующее представление в браузере (рис. 2). 
+
+8 
+ 
+ 
+Рисунок 3 – Страница Должности 
+Модификация страницы Сотрудники 
+Страница Сотрудники должна отображать таблицу с списком данных по 
+сотрудникам и форму для ввода данных нового сотрудника. 
+Разметка jsp-страницы person.jsp приведена на листинге 4. 
+ 
+Листинг 4. 
+ 
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+ pageEncoding="UTF-8"%> 
+<%@ taglib prefix="c" uri="jakarta.tags.core"%> 
+ 
+<%@ page import="domain.Role"%> 
+<%@ page import="domain.Person"%> 
+ 
+<% 
+Role r1 = new Role(1l, "директор"); 
+Role r2 = new Role(2l, "бухгалтер"); 
+Role r3= new Role(3l, "менеджер"); 
+Role r4 = new Role(4l, "маркетолог"); 
+Role[] roles = new Role[]{r1, r2, r3, r4}; 
+pageContext.setAttribute("roles", roles); 
+Person p1 = new Person(1l, "Иван","Иванов", "ivanov@mail.ru", "+7 
+(961)-289-55-24",1l, r1); 
+Person p2 = new Person(2l, "Петр","Петров", "petrov@mail.ru", "+7 
+(961)-289-44-39",2l, r2); 
+Person p3= new Person(3l, "Сидор","Сидоров", "sidorov@mail.ru", "+7 
+(961)-289-33-57",3l, r3); 
+Person p4 = new Person(4l, "Иван","Иванов", "ivanov@mail.ru", "+7 
+(961)-289-44-39",4l, r4); 
+Person[] persons = new Person[]{p1, p2, p3, p4}; 
+
+
+9 
+ 
+pageContext.setAttribute("persons", persons); 
+%> 
+ 
+<!DOCTYPE html> 
+<html> 
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8"> 
+<title>Сотрудники</title> 
+<head> 
+<meta charset="UTF-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+<title>Persons</title> 
+<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+<!-- Bootstrap CSS --> 
+<link rel="stylesheet" href="css/bootstrap.min.css"> 
+<!-- jQuery --> 
+<script defer src="js/jquery.min.js"></script> 
+<!-- Bootstrap JS + Popper JS --> 
+<script defer src="js/bootstrap.min.js"></script> 
+ 
+<script 
+ src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.mi
+n.js"></script> 
+ 
+</head> 
+<body> 
+<body> 
+  <div class="container-fluid"> 
+    <jsp:include page="/views/header.jsp" /> 
+    <div class="container-fluid"> 
+      <div class="row justify-content-start "> 
+        div class="col-8 border bg-light px-4"> 
+          <h3>Список сотрудников</h3> 
+          <table class="table"> 
+            <thead> 
+              <th scope="col">Код</th> 
+              <th scope="col">Фамилия</th> 
+              <th scope="col">Имя</th> 
+              <th scope="col">Должность</th> 
+              <th scope="col">Телефон</th> 
+              <th scope="col">Эл.почта</th> 
+              <th scope="col">Редактировать</th> 
+              <th scope="col">Удалить</th> 
+            </thead> 
+            <tbody> 
+              <c:forEach var="person" items="${persons}"> 
+                <tr> 
+                  <td>${person.getId()}</td> 
+                  <td>${person.getLastName()}</td> 
+                  <td>${person.getFirstName()}</td> 
+                  <td>${person.getRole()}</td> 
+                  <td>${person.getPhone()}</td> 
+
+10 
+ 
+                  <td>${person.getEmail()}</td> 
+                  <td width="20"><a href="#" role="button" 
+                    class="btn btn-outline-primary">  
+                    <img alt="Редактировать" 
+                       src="images/icon-edit.png"></a> 
+                  </td> 
+                  <td width="20"><a href="#" role="button" 
+                    class="btn btn-outline-primary">  
+                    <img alt="Удалить" 
+                    src="images/icon-delete.png"></a> 
+                  </td> 
+                </tr> 
+              </c:forEach> 
+            </tbody> 
+          </table> 
+         </div> 
+           <div class="col-4 border px-4"> 
+             <form method="POST" action=""> 
+               <h3>Новый сотрудник</h3> 
+               <br> 
+               <div class="mb-3 row"> 
+                 <label for="lastname"  
+                   class="col-sm-3 col-form-label">Фамилия</label> 
+                 <div class="col-sm-7"> 
+                   <input type="text" class="form-control"  
+                     id="staticLastname"name="lastname" /> 
+                 </div> 
+               </div> 
+               <div class="mb-3 row"> 
+                 label for="firstname"  
+                   class="col-sm-3 col-form-label">Имя</label> 
+                   <div class="col-sm-7"> 
+                     <input type="text"  
+                       class="form-control" id="staticFirstname" 
+                       name="firstname" /> 
+                   </div> 
+               </div> 
+               <div class="mb-3 row"> 
+                 label for="rolename"  
+                   class="col-sm-3 col-form-label">Должность</label> 
+                 <div class="col-sm-7"> 
+                   <select name="role" class="form-control"> 
+                     <option>Выберите должность</option> 
+                     <c:forEach var="role" items="${roles}"> 
+                       <option value="${role}"> 
+                         c:out value="${role.getNamerole()}"></c:out> 
+                       </option> 
+                     </c:forEach> 
+                   </select> 
+                 </div> 
+               </div> 
+
+11 
+ 
+               <div class="mb-3 row"> 
+                 <label for="phone"  
+                   class="col-sm-3 col-form-label">Телефон</label> 
+                 <div class="col-sm-7"> 
+                   <input type="text"  
+                     class="form-control" id="staticphone" 
+                     name="phone" /> 
+                 </div> 
+               </div> 
+               <div class="mb-3 row"> 
+                 <label for="email"  
+                   class="col-sm-3 col-form-label">Эл.почта</label> 
+                 <div class="col-sm-7"> 
+                   <input type="text" class="form-control" 
+                     id="staticemail" name="email" /> 
+                 </div> 
+               </div> 
+               <p> <br> 
+                 <button type="submit"  
+                   class="btn btn-primary">Добавить</button> 
+               </p> 
+             </form> 
+           </div> 
+         </div> 
+       </div> 
+       <jsp:include page="/views/footer.jsp" /> 
+    </div> 
+</body> 
+</html> 
+ 
+Подход к разработке страницы person.jsp аналогичный разработки 
+страницы role.jsp за некоторыми исключениями. 
+1. При создании тестовых данных требуется создать не только массив 
+сотрудников persons, но и массив должностей roles, который 
+используется в форме для выбора должности из имеющихся в списке 
+должностей. 
+2. В форме для задания должности используется  combobox – селектор, 
+который позволяет в цикле forEach загрузить список должностей, из 
+которого будет выбрана должность для нового сотрудника. 
+ 
+<select name="role" class="form-control"> 
+  <option>Выберите должность</option> 
+  <c:forEach var="role" items="${roles}"> 
+    <option value="${role}"> 
+
+12 
+ 
+      c:out value="${role.getNamerole()}"></c:out> 
+    </option> 
+  </c:forEach> 
+</select> 
+ 
+При запуске веб -приложения и переходе на страницу Сотрудники 
+получим следующее представление в браузере (рис. 3). 
+ 
+Рисунок 3 – Страница Сотрудники 
+ 
+Задание на лабораторную работу  
+1. Изучить теоретический материал лекции 1.6 – 1.8. 
+2. По варианту, определенному преподавателем, разработать 
+представления (jsp-страницы) для проекта и проверить их 
+работоспособность на тестовых данных.  
+3.  Продемонстрировать результаты работы веб-приложения предателю.  
+4. Слить ветку разработки dev4 с основной веткой master. 
+5. Подготовить отчет по лабораторной работе и загрузить его на учебный 
+портал.  
+ 

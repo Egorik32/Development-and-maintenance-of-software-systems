@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.502" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cityparks.controller.CityOverviewController">
+    <children>
+        <SplitPane dividerPositions="0.48" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <items>
+                <VBox spacing="8.0">
+                    <padding>
+                        <Insets bottom="12" left="12" right="8" top="12" />
+                    </padding>
+                    <Label styleClass="section-title" text="Список городов" />
+                    <TableView fx:id="cityTable" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="nameColumn" prefWidth="170" text="Название" />
+                            <TableColumn fx:id="statusColumn" prefWidth="190" text="Статус" />
+                        </columns>
+                    </TableView>
+                    <HBox spacing="8">
+                        <Button disable="true" text="Добавить" />
+                        <Button disable="true" text="Изменить" />
+                        <Button disable="true" text="Удалить" />
+                    </HBox>
+                </VBox>
+                <VBox spacing="12.0">
+                    <padding>
+                        <Insets bottom="12" left="12" right="12" top="12" />
+                    </padding>
+                    <Label styleClass="section-title" text="Информация о городе и парке" />
+                    <GridPane hgap="10.0" vgap="8.0">
+                        <columnConstraints>
+                            <ColumnConstraints minWidth="140.0" />
+                            <ColumnConstraints hgrow="ALWAYS" />
+                        </columnConstraints>
+                        <rowConstraints>
+                            <RowConstraints />
+                            <RowConstraints />
+                            <RowConstraints />
+                            <RowConstraints />
+                            <RowConstraints />
+                            <RowConstraints />
+                            <RowConstraints />
+                            <RowConstraints />
+                        </rowConstraints>
+                        <Label text="Город:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                        <Label fx:id="cityNameLabel" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                        <Label text="Статус:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                        <Label fx:id="cityStatusLabel" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label text="Население:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                        <Label fx:id="populationLabel" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label text="Парк:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                        <Label fx:id="parkNameLabel" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label text="Тип парка:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                        <Label fx:id="parkTypeLabel" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label text="Площадь:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                        <Label fx:id="parkAreaLabel" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label text="Водоем:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+                        <Label fx:id="waterLabel" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <Label text="Дата постройки:" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+                        <Label fx:id="buildDateLabel" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                    </GridPane>
+                </VBox>
+            </items>
+        </SplitPane>
+    </children>
+</AnchorPane>

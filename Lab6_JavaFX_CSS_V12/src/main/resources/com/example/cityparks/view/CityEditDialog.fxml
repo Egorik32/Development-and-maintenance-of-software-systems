@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.502" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cityparks.controller.CityEditDialogController">
+    <children>
+        <VBox spacing="14.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="12.0">
+            <Label styleClass="section-title" text="Карточка города" />
+            <GridPane hgap="10.0" vgap="8.0">
+                <columnConstraints>
+                    <ColumnConstraints minWidth="135.0" />
+                    <ColumnConstraints hgrow="ALWAYS" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints />
+                    <RowConstraints />
+                    <RowConstraints />
+                    <RowConstraints />
+                    <RowConstraints />
+                    <RowConstraints />
+                    <RowConstraints />
+                    <RowConstraints />
+                </rowConstraints>
+                <Label text="Название города" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <TextField fx:id="cityNameField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <Label text="Статус" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <TextField fx:id="cityStatusField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label text="Население" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <TextField fx:id="populationField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Label text="Парк" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <TextField fx:id="parkNameField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <Label text="Тип парка" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                <TextField fx:id="parkTypeField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <Label text="Площадь" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                <TextField fx:id="parkAreaField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                <Label text="Есть водоем" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+                <CheckBox fx:id="hasWaterCheckBox" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                <Label text="Дата постройки" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+                <DatePicker fx:id="buildDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            </GridPane>
+            <HBox alignment="CENTER_RIGHT" spacing="8.0">
+                <padding>
+                    <Insets top="6.0" />
+                </padding>
+                <Button defaultButton="true" onAction="#handleOk" text="OK" />
+                <Button cancelButton="true" onAction="#handleCancel" text="Отмена" />
+            </HBox>
+        </VBox>
+    </children>
+</AnchorPane>

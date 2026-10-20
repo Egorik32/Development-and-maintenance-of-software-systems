@@ -1,0 +1,15 @@
+[
+  {"number": 1, "folder": "01_Sum", "class": "LambdaApp", "expected": ["30"]},
+  {"number": 2, "folder": "02_AnonymousEquivalent", "class": "LambdaApp", "expected": ["30"]},
+  {"number": 3, "folder": "03_Arithmetic", "class": "LambdaApp", "expected": ["30", "10", "200"]},
+  {"number": 4, "folder": "04_Terminal", "class": "LambdaApp", "expected": ["Hello Java!"]},
+  {"number": 5, "folder": "05_ClassVariables", "class": "LambdaApp", "expected": ["50", "30"]},
+  {"number": 6, "folder": "06_LocalVariables", "class": "LambdaApp", "expected": ["100"]},
+  {"number": 7, "folder": "07_Block", "class": "LambdaApp", "expected": ["2", "0"]},
+  {"number": 8, "folder": "08_Generic", "class": "LambdaApp", "expected": ["30", "2010"]},
+  {"number": 9, "folder": "09_Parameters", "class": "Main", "expected": ["20", "30"]},
+  {"number": 10, "folder": "10_StaticReferences", "class": "Main", "expected": ["20", "45"]},
+  {"number": 11, "folder": "11_InstanceReference", "class": "LambdaApp", "expected": ["0"]},
+  {"number": 12, "folder": "12_ConstructorReference", "class": "LambdaApp", "expected": ["Tom"]},
+  {"number": 13, "folder": "13_ReturnLambda", "class": "LambdaApp", "expected": ["11", "6"]}
+]

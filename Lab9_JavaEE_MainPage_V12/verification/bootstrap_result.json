@@ -1,0 +1,16 @@
+{
+  "passed": true,
+  "versions": {
+    "jquery": "3.6.4",
+    "bootstrap": "5.3.3",
+    "plugin": "function",
+    "iconLoaded": true
+  },
+  "checks": [
+    "jQuery 3.6.4 and Bootstrap 5 load locally; jQuery popover plugin is available",
+    "Hover displays the required Bootstrap message",
+    "Popover hides after mouse leave",
+    "Mobile navigation and keyboard-focus popover work without overflow"
+  ],
+  "errors": []
+}

@@ -1,0 +1,12 @@
+[
+  {
+    "number": 1,
+    "class": "HelloWorldAnonymous",
+    "output": [
+      "Hello world",
+      "Salut Fred",
+      "Hola, mundo"
+    ],
+    "passed": true
+  }
+]

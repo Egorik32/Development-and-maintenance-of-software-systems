@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="ASCII"?>
+<anttasks:AntTask xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:anttasks="http://org.eclipse.fx.ide.jdt/1.0" buildDirectory="native-build">
+  <deploy packagingFormat="image" verbose="true">
+    <application name="CityParks" mainclass="com.example.cityparks.MainApp" version="1.0"/>
+    <info title="CityParks" vendor="CityParks Lab"/>
+  </deploy>
+  <signjar/>
+</anttasks:AntTask>

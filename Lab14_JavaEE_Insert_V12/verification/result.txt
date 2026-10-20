@@ -1,0 +1,10 @@
+PASS: Home page 200 and UTF-8 content
+PASS: Servlet city returns 200
+PASS: JSP displays model data
+PASS: Servlet park returns 200
+PASS: JSP displays model data
+PASS: Database has three seed cities
+PASS: Database has three seed parks
+PASS: POST inserts park with generated key and UTF-8
+PASS: POST inserts linked city
+RESULT: ALL CHECKS PASSED FOR LAB 1.14

@@ -1,0 +1,38 @@
+PASS: Home page 200 and UTF-8 content
+PASS: Browser city names, statuses and headers display correct UTF-8
+PASS: Deletion confirmation is readable; cancellation preserves the record
+PASS: Browser park names and types display correct UTF-8
+PASS: City and park edit forms contain readable Russian values
+PASS: Servlet city returns 200
+PASS: JSP displays model data
+PASS: HTTP city response declares UTF-8
+PASS: Correct Cyrillic in city data: Ростов-на-Дону
+PASS: Correct Cyrillic in city data: Шахты
+PASS: Correct Cyrillic in city data: Сочи
+PASS: Correct Cyrillic in city data: областной центр
+PASS: Correct Cyrillic in city data: город областного значения
+PASS: Correct Cyrillic in city data: курортный город
+PASS: Servlet park returns 200
+PASS: JSP displays model data
+PASS: HTTP park response declares UTF-8
+PASS: Correct Cyrillic in park data: Парк имени Горького
+PASS: Correct Cyrillic in park data: Парк Революции
+PASS: Correct Cyrillic in park data: Олимпийский парк
+PASS: Correct Cyrillic in park data: городской
+PASS: Correct Cyrillic in park data: культурный
+PASS: Correct Cyrillic in park data: спортивный
+PASS: Database has three seed cities
+PASS: Database has three seed parks
+PASS: POST inserts park with generated key and UTF-8
+PASS: POST inserts linked city
+PASS: City edit page contains selected record
+PASS: City UPDATE persisted
+PASS: City UPDATE preserves Cyrillic text
+PASS: Park edit page contains selected record
+PASS: Park UPDATE persisted
+PASS: Park UPDATE preserves Cyrillic text
+PASS: Delete confirmation present
+PASS: Related park deletion rejected with a clear conflict response
+PASS: City DELETE persisted
+PASS: Park DELETE persisted
+RESULT: ALL CHECKS PASSED FOR LAB 1.15

@@ -1,0 +1,3 @@
+PASS: FXML loaded; MVC view present
+PASS: Correct data for this stage
+RESULT: ALL CHECKS PASSED FOR LAB 1.3

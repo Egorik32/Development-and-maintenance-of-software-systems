@@ -1,0 +1,21 @@
+body {
+    background: #f6f7fb;
+}
+
+.page-title {
+    margin: 24px 0 16px;
+}
+
+.panel {
+    background: #ffffff;
+    border: 1px solid #d9dce5;
+    padding: 20px;
+}
+
+.table-actions {
+    white-space: nowrap;
+}
+
+.form-check {
+    padding-top: 8px;
+}

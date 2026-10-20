@@ -1,0 +1,3 @@
+[
+  {"number": 1, "folder": "01_HelloWorld", "class": "HelloWorldAnonymous", "expected": ["Hello world", "Salut Fred", "Hola, mundo"]}
+]

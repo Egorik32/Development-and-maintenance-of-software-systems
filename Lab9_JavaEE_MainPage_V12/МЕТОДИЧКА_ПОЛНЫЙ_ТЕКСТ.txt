@@ -1,0 +1,371 @@
+Лабораторная работа 1.9. Создание главной страницы проекта Java EE 
+Цель лабораторной работы. 
+Получить практические навыки создания проекта по шаблону Dynamic 
+Web Project и главной страницы проекта.  
+Введение 
+Данной работой начинается цикл лабораторных работ по созданию веб-
+приложения на базе технологии Java Enterprise Editional. Приложение 
+ориентировано на обработку данных о сотрудниках предприятия и будет 
+взаимодействовать с базой данных PostgresSQL. Модель данных содержит две 
+сущности Сотрудники и Должности. Приложение должно обеспечивать вывод 
+данных по сотрудникам и должностям, добавление новых , редактирование и 
+удаление данных о сотрудниках и должностях. 
+Для отслеживания изменений в проекте необходимо применить систему 
+контроля версий Git. В главной ветке проекта ( master) должна храниться 
+работоспособная версия проекта. Разработка новой функциональности, 
+которая определяется заданием на конкретную лабораторную работу, должна 
+проводиться в ветке devN, где N – номер лабораторной работы. После 
+выполнения текущей лабораторной работы и проверки её преподавателем, 
+ветка разработки devN должна быть слита с главной веткой – master. В 
+качестве удаленного репозитория рекомендуется использовать GitHub или 
+Bitbucket. 
+Создание проекта 
+Создадим в Eclipse проект по типу Dynamic Web Project с именем persons 
+(рис. 1 ). Обратите внимание, что версию Dynamic web model необходимо 
+использовать 5-ю, а сервер Apache Tomcat v10.0. 
+
+2 
+ 
+ 
+Рисунок 1 – Окно создания проекта 
+При нажатии клавиши Finish будет создана структура проекта (рис.2). 
+ 
+Рисунок 2 – Окно структуры проекта 
+Настройка локального сервера 
+Далее для настройки локального сервера следует открыть окно Servers 
+(рис. 3) 
+
+
+3 
+ 
+ 
+Рисунок 3 – Меню выбора настройки сервера 
+При создании сервера приложения необходимо выбрать тип сервера  – 
+Tomcat v10.0 (рис.4), папку его установки (рис. 5) и конфигурацию 
+приложения (рис. 6). 
+ 
+Рисунок 4 – Окно выбора локального сервера 
+
+
+4 
+ 
+ 
+Рисунок 5 – Окно задания местоположения сервера 
+ 
+Рисунок 6 – Окно выбора приложения 
+Информация о настройке сервера приведена на рис. 7. 
+
+
+5 
+ 
+ 
+Рисунок 7 – Окно свойств сервера  
+Создайте локальный репозиторий Git и зафиксируйте в нем созданный 
+проект. Создайте удаленный репозиторий и передайте в него состояние 
+локального репозитория. 
+Создание главной страницы приложения 
+В качестве главной страницы веб-приложения будем использовать файл 
+index.jsp, который поместим в папку /persons/src/main/webapp/index.jsp.  
+ 
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+    pageEncoding="UTF-8"%> 
+<!DOCTYPE html> 
+<html> 
+<head> 
+<meta charset="UTF-8"> 
+<title>Управление персоналом</title> 
+ 
+</head> 
+<body> 
+ 
+</body> 
+</html> 
+ 
+
+
+6 
+ 
+Для тестирования шаблона главной страницы веб-приложения запустим 
+сервер командой run on Server (рис. 8). 
+ 
+Рисунок 8 – Запуск веб-приложения 
+В браузере должен отобразиться шаблон представления гла вной 
+страницы приложения (рис.  9), который соответствует адресу 
+http://localhost:8081/persons/. 
+ 
+Рисунок 9 - Шаблон представления главной страницы приложения 
+Для дизайна страниц веб -проекта будем использовать  фремворк 
+Bootstrap и библиотеку jQuery. 
+Bootstrap — это открытый и бесплатный HTML, CSS и JS фреймворк, 
+который используется веб -разработчиками для быстрой вёрстки адаптивных 
+дизайнов сайтов и веб-приложений. 
+
+
+7 
+ 
+jQuery – набор функций JavaScript, фокусирующийся на взаимодействии 
+JavaScript и HTML. Библиотека jQuery помогает легко по лучать доступ к 
+любому элементу DOM, обращаться к атрибутам и содержимому элементов 
+DOM, манипулировать ими.  
+Для стадии разработки веб -приложения будем использо вать локальное 
+подключения Bootstrap 5 и jQuery. Для этого необходимо скачать Bootstrap 5 
+(https://getbootstrap.com/docs/5.0/getting-started/download/) и jQuery 
+(https://jquery.com/download/ ). 
+Из архива Bootstrap 5 будем использовать файлы bootstrap.min.css и 
+bootstrap.bundle.min.js. Для библиотеки jQuery используем файл jquery-3.6.4.js. 
+Файл bootstrap.min.css поместим в папку /persons/src/main/webapp/css/, а 
+файлы с расширением .js – в папку /persons/src/main/webapp/js/ (рис. 10). 
+ 
+Рисунок 10 – Подключение в проект файлов Bootstrap и jQuery 
+На главной странице index.jsp добавим ссылки на файлы Bootstrap и 
+jQuery 
+ 
+<!-- Bootstrap CSS --> 
+<link rel="stylesheet" href="css/bootstrap.min.css"> 
+<!-- jQuery --> 
+<script defer src="js/jquery-3.6.4.js"></script> 
+<!-- Bootstrap JS + Popper JS --> 
+
+
+8 
+ 
+<script defer src="js/bootstrap.bundle.min.js"></script> 
+ 
+Для проверки подключения Bootstrap добавим на главную страницу 
+кнопку, при наведении на которую должно выводиться сообщение.  
+ 
+<button type="button" class="btn btn-primary" data-toggle="popover"  
+ title="Сообщение" data-content="Ура, Bootstrap 5 работает"> 
+ Поднеси ко мне курсор 
+</button> 
+ 
+На рис. 11 показано представление в браузере отображения кнопки с 
+сообщением при наведении на кнопку курсора. 
+ 
+Рисунок 11 – Отображение кнопки с сообщением 
+На главной странице будем выводить шапку ( header) с логотипом и 
+названием приложения, в основном теле страницы выведем перечень ссылок 
+на функции системы и в подвале ( footer) сформируем информационное 
+сообщение. Код index.jsp приведен на листинге 1. 
+ 
+Листинг 1. 
+ 
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+    pageEncoding="UTF-8"%> 
+<!DOCTYPE html> 
+<html lang="ru"> 
+<head> 
+<link rel="stylesheet" type="text/css" href="css/style.css"> 
+ 
+
+
+9 
+ 
+<meta charset="UTF-8"> 
+ 
+<!-- Настройка viewport --> 
+ <meta name="viewport" content="width=device-width, initial-scale=1"> 
+ 
+<!-- Bootstrap CSS --> 
+<link rel="stylesheet" href="css/bootstrap.min.css"> 
+ 
+<title>Управление персоналом</title> 
+ 
+</head> 
+<body> 
+ 
+ <div class="container-fluid"> 
+ <nav class="navbar navbar-light bg-primary"> 
+   <div class="container-fluid"> 
+     <a class="navbar-brand" href="#"> 
+       <img src="images/employees.png" alt="" width="80" 
+height="80" > 
+     </a> 
+     <h2>Управление персоналом</h2> 
+     </div> 
+ </nav> 
+ 
+ <div class="container"> 
+  <br><br><br> 
+    <div class="list-group text-center py-3 px-3"> 
+    <h2>Функции системы</h2> 
+    <ul class="list-group list-group-flush"> 
+     <li class="list-group-item list-group-item-
+primary"><a href="#">Сотрудники</a> 
+     <li class="list-group-item list-group-item-
+info"><a href="#">Должности</a> 
+    </ul> 
+     </div> 
+  <br><br> 
+ </div> 
+ 
+ <!-- Footer --> 
+ <footer style="background: #d7d7d7 ; " class="page-footer font-
+small black"> 
+   <!-- Copyright --> 
+   <div class="footer-copyright text-center py-3 px-3" 
+>Демонстрационное веб-приложение JavaEE © 2023 Copyright: 
+     <a href="https://dolsoft.com/"> Dolsoft.com</a> 
+   </div>  
+   <!-- Copyright --> 
+ </footer> 
+  <!-- Footer --> 
+</div> 
+<!-- jQuery --> 
+
+10 
+ 
+<script src="js/jquery-3.6.4.js"></script> 
+<!-- Bootstrap JS + Popper JS -->  
+<script defer src="js/bootstrap.bundle.min.js"></script> 
+</body> 
+</html> 
+ 
+ 
+При запуске приложения главная страница будет отображаться 
+следующим образом (рис. 12). 
+ 
+Рисунок 12 – Главная страница веб-приложения 
+Выделение шапки и подвала в отдельные страницы 
+С учетом того, что шапка и подвал главной страницы должны 
+повторяться на других страницах приложения выделим их в отдельные 
+страницы header.jsp и footer.jsp, которые приведены на листингах 1, 2  и 
+поместим в папку webapp/views/. 
+ 
+Листинг 2. 
+ 
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+    pageEncoding="UTF-8"%> 
+<!DOCTYPE html> 
+<html> 
+
+
+11 
+ 
+<head> 
+<meta charset="UTF-8"> 
+<!-- Настройка viewport --> 
+ <meta name="viewport" content="width=device-width, initial-scale=1"> 
+</head> 
+<body> 
+ <!-- Header --> 
+ <nav class="navbar navbar-light bg-primary"> 
+   <div class="container-fluid"> 
+     <a class="navbar-brand" href="#"> 
+       <img src="images/employees.png" alt="" width="80" 
+height="80" > 
+     </a> 
+     <h2>Управление персоналом</h2> 
+     </div> 
+ </nav> 
+ <!-- /Header --> 
+</body> 
+</html> 
+ 
+Листинг 3. 
+ 
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+    pageEncoding="UTF-8"%> 
+<!DOCTYPE html> 
+<html> 
+<head> 
+<meta charset="UTF-8"> 
+<!-- Настройка viewport --> 
+ <meta name="viewport" content="width=device-width, initial-scale=1"> 
+ 
+</head> 
+<body> 
+ <!-- Footer --> 
+ <footer style="background: #d7d7d7 ; " class="page-footer font-
+small black"> 
+   <!-- Copyright --> 
+   <div class="footer-copyright text-center py-3 px-3" > 
+    Демонстрационное веб-приложение JavaEE © 2023 Copyright: 
+     <a href="https://dolsoft.com/"> Dolsoft.com</a> 
+   </div>  
+   <!-- Copyright --> 
+ </footer> 
+  <!-- /Footer -->  
+</body> 
+</html> 
+ 
+В шапке header.jsp добавим для логотипа изображение persons.png и 
+ссылку возврата на главную страницу.  
+
+12 
+ 
+ 
+<a href="/persons/"> 
+<img alt="Логотип" id="top-image" src="images/persons.png"> 
+</a> 
+ 
+Файл employees.png поместим в папку webapp/images. 
+Выделение шапки и подвала главной страницы в отдельные файлы 
+потребовало внести изменения в главную страницу index.jsp (листинг 4). 
+ 
+Листинг 4. 
+ 
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+    pageEncoding="UTF-8"%> 
+<!DOCTYPE html> 
+<html lang="ru"> 
+<head> 
+<meta charset="UTF-8"> 
+<!-- Настройка viewport --> 
+ <meta name="viewport" content="width=device-width, initial-scale=1"> 
+<!-- Bootstrap CSS --> 
+<link rel="stylesheet" href="css/bootstrap.min.css"> 
+ 
+<title>Управление персоналом</title> 
+ 
+</head> 
+<body> 
+ 
+ <div class="container-fluid"> 
+ <jsp:include page="/views/header.jsp" /> 
+ <div class="container"> 
+  <br><br><br> 
+    <div class="list-group text-center py-3 px-3"> 
+    <h2>Функции системы</h2> 
+    <ul class="list-group list-group-flush"> 
+     <li class="list-group-item list-group-item-
+primary"><a href="#">Сотрудники</a> 
+     <li class="list-group-item list-group-item-
+info"><a href="#">Должности</a> 
+    </ul> 
+     </div> 
+  <br><br> 
+ </div> 
+  <jsp:include page="/views/footer.jsp" /> 
+</div> 
+</body> 
+</html> 
+ 
+
+13 
+ 
+После внесенных изменения при запуске веб -приложения главная 
+страница, приведенная на рис.12 не изменится. 
+Внимание.  
+1. Стили и настройки Bootstrap необходимо изучить по 
+документации (https://bootstrap-4.ru/docs/5.1/getting-
+started/introduction/). 
+2. Дизайн, как главной страницы, так и других страниц веб -
+приложения может быть предложен студентом при согласовании 
+с преподавателем. 
+ 
+Изменения в коде проекта необходимо зафиксировать в ветке dev1. 
+После проверки работоспособности приложения, демонстрации работы 
+приложения преподавателю и одобрения преподавателем текущей 
+функциональности ветка dev1 должна быть слита с главной веткой master. 
+Состояние локального репозитория необходимо передать в удаленный 
+репозиторий. 
+ 
+Задание на лабораторную работу  
+1. Изучить теоретический материал лекции 1.6 – 1.8. 
+2. По варианту, определенному преподавателем, создать проект по 
+шаблону Dynamic Web и главную страницу.  
+3.  Продемонстрировать результаты работы предателю.  
+4. Подготовить отчет по лабораторной работе и загрузить его на учебный 
+портал.  
+ 

@@ -1,0 +1,3 @@
+PASS: Scene Builder model loaded and saved CityOverview.fxml
+PASS: Scene Builder model loaded and saved RootLayout.fxml
+RESULT: SCENE BUILDER CHECKS PASSED

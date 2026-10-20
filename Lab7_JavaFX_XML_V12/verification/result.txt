@@ -1,0 +1,21 @@
+PASS: FXML loaded; MVC view present
+PASS: Correct data for this stage
+PASS: Application icon loaded
+PASS: CSS connected
+PASS: Selection displays details
+PASS: Add city with all park fields
+PASS: Edit updates details
+PASS: Cancel preserves original data
+PASS: Invalid input keeps dialog open
+PASS: Invalid input not added
+PASS: Invalid input keeps dialog open
+PASS: Invalid input not added
+PASS: Invalid input keeps dialog open
+PASS: Invalid input not added
+PASS: Delete removes selected record
+PASS: JAXB XML roundtrip restores records
+PASS: XML restores modified park fields
+PASS: Last file persisted in Preferences
+PASS: Startup loads last saved XML automatically
+PASS: Invalid XML preserves existing records
+RESULT: ALL CHECKS PASSED FOR LAB 1.7

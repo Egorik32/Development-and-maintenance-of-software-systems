@@ -1,0 +1,33 @@
+READY: window=true; view=true
+PASS: FXML loaded; MVC view present
+PASS: Correct data for this stage
+PASS: Application icon loaded
+PASS: CSS connected
+PASS: Selection displays details
+PASS: Light theme and menu are synchronized
+PASS: Menu switches the scene to dark theme
+PASS: Dark theme choice survives application recreation
+PASS: Dark theme headings remain readable
+PASS: Switching back removes dark CSS
+PASS: Edit dialog uses dark theme
+PASS: Add city with all park fields
+PASS: Edit updates details
+PASS: Cancel preserves original data
+PASS: Validation alert uses dark theme
+PASS: Invalid input keeps dialog open
+PASS: Invalid input not added
+PASS: Validation alert uses dark theme
+PASS: Invalid input keeps dialog open
+PASS: Invalid input not added
+PASS: Validation alert uses dark theme
+PASS: Invalid input keeps dialog open
+PASS: Invalid input not added
+PASS: Delete removes selected record
+PASS: JAXB XML roundtrip restores records
+PASS: XML restores modified park fields
+PASS: Last file persisted in Preferences
+READY: window=true; view=true
+PASS: New window restores saved dark theme
+PASS: Startup loads last saved XML automatically
+PASS: Invalid XML preserves existing records
+RESULT: ALL CHECKS PASSED FOR LAB 1.8

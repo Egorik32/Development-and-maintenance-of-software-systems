@@ -1,0 +1,1 @@
+PASS: Native executable started with its own runtime; JavaFX window and populated view verified by startup log.

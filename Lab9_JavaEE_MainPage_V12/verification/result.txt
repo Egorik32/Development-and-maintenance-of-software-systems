@@ -1,0 +1,6 @@
+PASS: Home page 200 and UTF-8 content
+PASS: jQuery 3.6.4 and Bootstrap 5 load locally; jQuery popover plugin is available
+PASS: Hover displays the required Bootstrap message
+PASS: Popover hides after mouse leave
+PASS: Mobile navigation and keyboard-focus popover work without overflow
+RESULT: ALL CHECKS PASSED FOR LAB 1.9
