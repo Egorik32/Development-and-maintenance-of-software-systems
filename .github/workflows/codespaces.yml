@@ -1,0 +1,36 @@
+name: Codespaces labs
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - .devcontainer/**
+      - .github/workflows/codespaces.yml
+      - Lab1_AnonymousClasses_V12/**
+      - Lab2_LambdaExpressions_V12/**
+      - Lab9_*/**
+      - Lab1[0-5]_*/**
+      - tools/DomainCheck.java
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: codespaces-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Build and check the Codespaces environment
+        uses: devcontainers/ci@513af61f4de4f75d37e4438f184ba4358f0fc1ca # v0.3
+        with:
+          push: never
+          runCmd: python3 .devcontainer/verify.py

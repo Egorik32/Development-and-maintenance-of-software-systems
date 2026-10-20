@@ -1,0 +1,28 @@
+{
+  "name": "Java labs 1.1-1.2 and 1.9-1.15",
+  "dockerComposeFile": "compose.yaml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/labs",
+  "remoteUser": "vscode",
+  "overrideCommand": false,
+  "shutdownAction": "stopCompose",
+  "hostRequirements": { "cpus": 2, "memory": "4gb" },
+  "postCreateCommand": "python3 .devcontainer/lab.py prepare",
+  "postStartCommand": "python3 .devcontainer/lab.py start",
+  "waitFor": "postStartCommand",
+  "forwardPorts": [8080],
+  "portsAttributes": {
+    "8080": {
+      "label": "Laboratory web applications",
+      "protocol": "http",
+      "onAutoForward": "openBrowserOnce"
+    },
+    "5432": { "onAutoForward": "ignore" }
+  },
+  "otherPortsAttributes": { "onAutoForward": "ignore" },
+  "customizations": {
+    "vscode": {
+      "settings": { "terminal.integrated.defaultProfile.linux": "bash" }
+    }
+  }
+}
