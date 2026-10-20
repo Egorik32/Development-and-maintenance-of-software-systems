@@ -3,6 +3,7 @@
 **/build/
 **/dist/
 **/__pycache__/
+**/node_modules/
 **/native-build/deploy/
 **/native-build/dist/
 **/native-build/build/

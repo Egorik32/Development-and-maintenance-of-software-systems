@@ -22,12 +22,12 @@
 	
 		<mkdir dir="project" />
 		<copy todir="project">
-			<fileset dir="C:\Users\egor2\OneDrive\Рабочий стол\Домашка\Разработка и сопровождение программных систем\Moodle_ЛР_часть_1\Lab8_JavaFX_NativePackage_V12">
+			<fileset dir="${basedir}/..">
 				<include name="src\main\java/**" />
 			</fileset>
 		</copy>
 		<copy todir="project">
-			<fileset dir="C:\Users\egor2\OneDrive\Рабочий стол\Домашка\Разработка и сопровождение программных систем\Moodle_ЛР_часть_1\Lab8_JavaFX_NativePackage_V12">
+			<fileset dir="${basedir}/..">
 				<include name="src\main\resources/**" />
 			</fileset>
 		</copy>
@@ -66,7 +66,7 @@
 					<include name="*"/>
 				</fileset>
 				<filelist>
-					<file name="C:\Users\egor2\OneDrive\Рабочий стол\Домашка\Разработка и сопровождение программных систем\Moodle_ЛР_часть_1\runtime\zulu8.96.0.205-ca-fx-jdk8.0.504-win_x64\jre\lib\ext\jfxrt.jar"/>
+					<file name="${java.home}/lib/ext/jfxrt.jar"/>
 				</filelist>
 			</classpath>
 		</javac>

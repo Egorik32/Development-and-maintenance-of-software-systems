@@ -1,4 +1,4 @@
-﻿param([int[]]$Numbers = @(9,10,11,12,13,14,15), [switch]$CheckLab15Browser)
+﻿param([int[]]$Numbers = @(9,10,11,12,13,14,15), [switch]$CheckLab15Browser, [string]$NodePath = 'node')
 $ErrorActionPreference = "Stop"
 $course = Split-Path $PSScriptRoot -Parent
 $labs = Get-Content -LiteralPath (Join-Path $PSScriptRoot "lab_conditions.json") -Raw | ConvertFrom-Json
@@ -34,13 +34,11 @@ foreach ($lab in $labs | Where-Object { $_.number -ge 9 -and $Numbers.Contains([
         $result = & {
             Assert-Lab ($homePage.Content.Contains('Города и парки') -and $homePage.Content.Contains('Главное меню')) "Home page 200 and UTF-8 content"
             if ($n -eq 9) {
-                $node = (Get-Command node -ErrorAction Stop).Source
-                & $node (Join-Path $PSScriptRoot 'verify_bootstrap.cjs') "$base/" $verification
+                & $NodePath (Join-Path $PSScriptRoot 'verify_bootstrap.cjs') "$base/" $verification
                 if ($LASTEXITCODE -ne 0) { throw 'Bootstrap browser verification failed.' }
             }
             if ($n -eq 15 -and $CheckLab15Browser) {
-                $node = (Get-Command node -ErrorAction Stop).Source
-                & $node (Join-Path $PSScriptRoot 'verify_lab15_utf8.cjs') $base $verification
+                & $NodePath (Join-Path $PSScriptRoot 'verify_lab15_utf8.cjs') $base $verification
                 if ($LASTEXITCODE -ne 0) { throw 'Lab 1.15 browser UTF-8 verification failed.' }
             }
             if ($n -ge 10) {

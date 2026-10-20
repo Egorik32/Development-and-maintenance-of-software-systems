@@ -59,6 +59,8 @@ public class EfxBuildGenerator {
         File build = new File(project, "native-build");
         build.mkdirs();
         String generated = new AntTemplate().generateAnt(config);
+        generated = generated.replace(project.getAbsolutePath(), "${basedir}/..");
+        generated = generated.replace(config.jfxjar, "${java.home}/lib/ext/jfxrt.jar");
         Files.write(new File(build, "build.generated.xml").toPath(), generated.getBytes(StandardCharsets.UTF_8));
         // Tutorial part 7 requires the project directory on the Ant icon resource path and an explicit version.
         String customized = generated.replace("<filelist>", "<filelist>\n<file name=\"${basedir}\"/>");
