@@ -1,6 +1,0 @@
-PASS: Home page 200 and UTF-8 content
-PASS: Servlet city returns 200
-PASS: Template servlet responds
-PASS: Servlet park returns 200
-PASS: Template servlet responds
-RESULT: ALL CHECKS PASSED FOR LAB 1.10

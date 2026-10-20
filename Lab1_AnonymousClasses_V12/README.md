@@ -22,4 +22,4 @@
 
 Исходники находятся в `examples/01_HelloWorld`: интерфейс `HelloWorld`, класс `EnglishGreeting` и `HelloWorldAnonymous` с двумя анонимными реализациями.
 
-Ожидаемый вывод: `Hello world`, `Salut Fred`, `Hola, mundo`. Скрипт компилирует пример отдельно от варианта 12 и проверяет вывод. Результат сохраняется в `verification/examples_result.json`.
+Ожидаемый вывод: `Hello world`, `Salut Fred`, `Hola, mundo`. Скрипт компилирует пример отдельно от варианта 12 и проверяет вывод в терминале.

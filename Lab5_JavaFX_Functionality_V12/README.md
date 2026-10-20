@@ -8,8 +8,6 @@
 
 Разработка функционала приложения. Вариант 12.
 
-Условие: `ЗАДАНИЕ.txt`. Учебник: https://code.makery.ch/ru/library/javafx-tutorial/part3/
-
 Откройте эту папку в VS Code, затем терминал PowerShell:
 
 ```powershell

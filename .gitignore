@@ -23,3 +23,12 @@ reports_rendered*/
 *.zip
 *.msi
 *.war
+**/verification/
+**/verification.txt
+materials/
+reports/
+*.docx
+**/ЗАДАНИЕ.txt
+**/ВАРИАНТ.txt
+**/МЕТОДИЧКА_ПОЛНЫЙ_ТЕКСТ.txt
+**/УСЛОВИЕ_ОРИГИНАЛ.pdf

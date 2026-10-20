@@ -8,8 +8,6 @@
 
 Стилизация представлений с помощью CSS. Вариант 12.
 
-Условие: `ЗАДАНИЕ.txt`. Учебник: https://code.makery.ch/ru/library/javafx-tutorial/part4/
-
 Откройте эту папку в VS Code, затем терминал PowerShell:
 
 ```powershell
